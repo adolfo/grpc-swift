@@ -25,7 +25,7 @@ internal enum ContentType {
   init?(value: String) {
     switch value {
     case "application/grpc",
-         "application/grpc+proto":
+         "application/grpc":
       self = .protobuf
 
     case "application/grpc-web",
@@ -44,7 +44,7 @@ internal enum ContentType {
   var canonicalValue: String {
     switch self {
     case .protobuf:
-      return "application/grpc+proto"
+      return "application/grpc"
 
     case .webProtobuf:
       return "application/grpc-web+proto"

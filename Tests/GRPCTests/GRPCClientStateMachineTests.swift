@@ -60,7 +60,7 @@ class GRPCClientStateMachineTests: GRPCTestCase {
   /// Returns a minimally valid `HPACKHeaders` for a response.
   func makeResponseHeaders(
     status: String? = "200",
-    contentType: String? = "application/grpc+proto"
+    contentType: String? = "application/grpc"
   ) -> HPACKHeaders {
     var headers: HPACKHeaders = [:]
     status.map { headers.add(name: ":status", value: $0) }
@@ -377,7 +377,7 @@ extension GRPCClientStateMachineTests {
     case .clientActiveServerIdle,
          .clientClosedServerIdle:
       trailers.add(name: ":status", value: "200")
-      trailers.add(name: "content-type", value: "application/grpc+proto")
+      trailers.add(name: "content-type", value: "application/grpc")
     default:
       break
     }
@@ -662,7 +662,7 @@ extension GRPCClientStateMachineTests {
       XCTAssertEqual(headers[":path"], ["/echo/Get"])
       XCTAssertEqual(headers[":authority"], ["localhost"])
       XCTAssertEqual(headers[":scheme"], ["http"])
-      XCTAssertEqual(headers["content-type"], ["application/grpc+proto"])
+      XCTAssertEqual(headers["content-type"], ["application/grpc"])
       XCTAssertEqual(headers["te"], ["trailers"])
       XCTAssertEqual(headers["grpc-timeout"], ["1H"])
       XCTAssertEqual(headers["x-grpc-id"], ["request-id"])
